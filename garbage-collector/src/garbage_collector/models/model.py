@@ -21,7 +21,7 @@ class Bin(Base):
     location_id = Column(Integer, ForeignKey("locations.id"))
     total_capacity = Column(Integer, default=100)
     fill_level = Column(Integer, default=0)
-    is_available = Column(Boolean) # Flags -> True means available for Pickup else Not available for Pickup
+    is_available = Column(Boolean, default=False) # Flags -> True means available for Pickup else Not available for Pickup
 
 class Truck(Base):
     __tablename__ = "trucks"
@@ -29,7 +29,7 @@ class Truck(Base):
     name = Column(String, index=True)
     total_capacity = Column(Integer, default=200)
     fill_level = Column(Integer, default=0)
-    is_available = Column(Boolean)
+    is_available = Column(Boolean, default=False)
 
 class BinPickUpAssignment(Base):
     __tablename__ = "bin_pickup_assignments"

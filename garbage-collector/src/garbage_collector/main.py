@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
+from src.garbage_collector.routers.api_router import router
 
 app = FastAPI(title="Garbage Collector", description="L2 Project.")
-
+app.include_router(router)
 @app.get("/", response_class=HTMLResponse)
 def home():
     return """
