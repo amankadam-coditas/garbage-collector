@@ -29,12 +29,13 @@ class Truck(Base):
     name = Column(String, index=True)
     total_capacity = Column(Integer, default=200)
     fill_level = Column(Integer, default=0)
-    is_available = Column(Boolean, default=False)
+    is_available = Column(Boolean, default=True)
 
 class BinPickUpAssignment(Base):
     __tablename__ = "bin_pickup_assignments"
     id = Column(Integer, primary_key=True, index=True)
     bin_id = Column(Integer, ForeignKey("bins.id"))
     truck_id = Column(Integer, ForeignKey("trucks.id"))
-    pickup_status = Column(String, default="Assigned") # Pickup Status -> Assigned, Picked, Done
+    pickup_status = Column(String, default="assigned") # Pickup Status -> assigned, picked, done
+    garbage_quantity = Column(Integer)
     assigned_date = Column(DateTime, default=func.now())

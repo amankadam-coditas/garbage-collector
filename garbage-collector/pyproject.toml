@@ -10,20 +10,21 @@ requires-python = ">=3.13"
 dependencies = [
     "fastapi (>=0.118.0,<0.119.0)",
     "sqlalchemy (>=2.0.43,<3.0.0)",
-    "pydantic (>=2.11.9,<3.0.0)",
+    "pydantic[email] (>=2.11.10,<3.0.0)",
     "pydantic-settings (>=2.11.0,<3.0.0)",
     "passlib[bcrypt] (>=1.7.4,<2.0.0)",
     "python-jose (>=3.5.0,<4.0.0)",
     "uvicorn (>=0.37.0,<0.38.0)",
     "poethepoet (>=0.37.0,<0.38.0)",
-    "alembic (>=1.16.5,<2.0.0)"
+    "alembic (>=1.16.5,<2.0.0)",
+    "argon2-cffi (>=25.1.0,<26.0.0)"
 ]
 
 [tool.poetry]
 packages = [{include = "garbage_collector", from = "src"}]
 
 [tool.poe.tasks]
-server = "uvicorn src.garbage_collector.main:app --reload --port 8000"
+server = "uvicorn src.garbage_collector.main:app --reload --port 1611"
 
 
 [build-system]
