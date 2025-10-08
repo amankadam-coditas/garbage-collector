@@ -27,3 +27,7 @@ def add_garbage(add_garbage:bin_schema.AddGarbage, db:Session):
 def get_all(db:Session):
     all_bins = db.query(Bin).all()
     return all_bins
+
+def get_pending_bins(db: Session):
+    pending_bins = db.query(Bin).filter(Bin.is_available == True).all()
+    return pending_bins

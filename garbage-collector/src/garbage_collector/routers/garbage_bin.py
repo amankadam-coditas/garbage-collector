@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from src.garbage_collector.schemas import bin as bin_schema
 from src.garbage_collector.services import bin as bin_service
 from src.garbage_collector.database.database import get_db
+from typing import List
 
 router = APIRouter(prefix="/bin")
 
@@ -26,6 +27,18 @@ def add_garbage(add_garbage:bin_schema.AddGarbage, db:Session = Depends(get_db))
 def get_all_bins(db:Session = Depends(get_db)):
     try:
         response = bin_service.get_all(db=db)
+        return response
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error : {e}")
+
+@router.get("/pending", response_model=List[bin_schema.BinOutput])
+def get_pending_bins(db: Session = Depends(get_db)):
+    """
+    Get a list of all bins that have crossed the fill threshold (>80%)
+    and are waiting for a pickup assignment.
+    """
+    try:
+        response = bin_service.get_pending_bins(db=db)
         return response
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error : {e}")

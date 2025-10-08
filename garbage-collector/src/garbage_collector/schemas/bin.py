@@ -11,6 +11,9 @@ class BinBaseModel(BaseModel):
     class Config:
         from_attributes = True  
 
+class BinOutput(BinBaseModel):
+    id: int
+
 class AddGarbage(BaseModel):
     bin_id:int = Field(...)
     fill_level:int = Field(ge=0)
